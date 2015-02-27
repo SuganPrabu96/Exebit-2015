@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="0dp"
+    tools:context="com.example.exebit.exebit.FAQ"
+    android:background="@color/myBackgroundColor">
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:paddingTop="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true">
+
+        <ScrollView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:fillViewport="true"
+            > <!--IMPORTANT otherwise backgrnd img. will not fill the whole screen -->
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="3dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="FAQ"
+                    android:textStyle="bold"
+                    android:textColor="@color/Textcolour"
+                    android:id="@+id/Profile_Page_faq"
+                    android:layout_marginTop="41dp"
+                    android:textSize="32sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="The Institute main gate will be open at all times. You may enter and depart from the campus at all times."          android:id="@+id/faq_ans1"
+                    android:textSize="16sp"
+                    android:textColor="@color/Textcolour"
+                    android:layout_below="@+id/faq_q1"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text=" Outstation participants who have registered for accommodation are requested to report to the control room where the required formalities involving checking of documents and allotment of rooms will be finished."
+                    android:id="@+id/faq_ans2"
+                    android:textColor="@color/Textcolour"
+                    android:layout_below="@+id/faq_q2"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Textcolour"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="When can I enter the IITM campus ? "
+                    android:id="@+id/faq_q1"
+                    android:textSize="20sp"
+                    android:layout_below="@+id/Profile_Page_faq"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/Textcolour"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="What should I do after coming to the campus ?"
+                    android:id="@+id/faq_q2"
+                    android:textSize="20sp"
+                    android:layout_marginTop="41dp"
+                    android:layout_below="@+id/faq_ans1"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="What should I bring with me ?"
+                    android:id="@+id/faq_q3"
+                    android:textColor="@color/Textcolour"
+                    android:layout_below="@+id/faq_ans2"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="39dp"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="It is mandatory for all participants or company representatives to carry college IDs or company IDs"
+                    android:id="@+id/faq_ans3"
+                    android:textColor="@color/Textcolour"
+                    android:layout_below="@+id/faq_q3"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="16sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="What about the eating facilities ?"
+                    android:id="@+id/faq_q4"
+                    android:textColor="@color/Textcolour"
+                    android:textSize="20sp"
+                    android:layout_below="@+id/faq_ans3"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="46dp" />
+                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="A variety of food stalls shall be set up in the heart of the festive area which will cater to all your food requirements. Apart from that, there are other eating outlets in the campus like IRCTC Canteen, Campus Cafe, Gurunath "
+                    android:id="@+id/faq_ans4"
+                    android:textSize="16sp"
+                    android:textColor="@color/Textcolour"
+                    android:layout_below="@+id/faq_q4"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </FrameLayout>
+
+</RelativeLayout>
+

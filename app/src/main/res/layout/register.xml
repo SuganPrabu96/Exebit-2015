@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/myBackgroundColor">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:paddingTop="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true">
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true"
+        > <!--IMPORTANT otherwise backgrnd img. will not fill the whole screen -->
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textViewHeading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/registration"
+        android:gravity="center"
+        android:textAllCaps="true"
+        android:textSize="28sp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000"/>
+
+    <TextView
+        android:id="@+id/textViewFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewHeading"
+        android:layout_marginLeft="30dp"
+        android:paddingTop="15dp"
+        android:text="@string/name"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <EditText
+        android:id="@+id/editTextFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewFullName"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@+id/textViewFullName"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+
+
+    <TextView
+        android:id="@+id/textViewDateOfBirth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextFullName"
+        android:layout_marginLeft="30dp"
+        android:layout_below="@+id/editTextFullName"
+        android:layout_marginTop="15dp"
+        android:text="@string/birthdate"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <ImageButton
+        android:id="@+id/imageButtonCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewDateOfBirth"
+        android:layout_alignLeft="@+id/textViewDateOfBirth"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/ic_launcher"
+        android:onClick="showDatePickerDialog"/>
+
+    <TextView
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:id="@+id/textViewSelectedDateOfBirth"
+        android:text=""
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/textViewCollegeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="30dp"
+        android:text="@string/college"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/imageButtonCalendar" />
+
+    <EditText
+        android:id="@+id/editTextCollegeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_alignLeft="@+id/textViewCollegeName"
+        android:layout_below="@+id/textViewCollegeName"
+        android:ems="10"
+        android:inputType="textPersonName" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/textViewPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextCollegeName"
+        android:layout_alignLeft="@+id/editTextCollegeName"
+        android:layout_marginLeft="30dp"
+        android:text="@string/phoneNumber"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewCollegeName"
+        android:layout_below="@+id/textViewCollegeName"
+        android:layout_marginLeft="30dp"
+        android:ems="10"
+        android:inputType="phone" />
+
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextPhone"
+        android:layout_alignLeft="@+id/editTextPhone"
+        android:layout_marginLeft="30dp"
+        android:text="@string/email"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewEmail"
+        android:layout_below="@+id/textViewEmail"
+        android:layout_marginLeft="30dp"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <TextView
+        android:id="@+id/textViewUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextEmail"
+        android:layout_alignLeft="@+id/editTextEmail"
+        android:layout_marginLeft="30dp"
+        android:text="@string/userName"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <EditText
+        android:id="@+id/editTextUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewUserName"
+        android:layout_below="@+id/textViewUserName"
+        android:layout_marginLeft="30dp"
+        android:ems="10"/>
+
+    <TextView
+        android:id="@+id/textViewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextUserName"
+        android:layout_alignLeft="@+id/editTextUserName"
+        android:text="@string/password"
+        android:layout_marginLeft="30dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewPassword"
+        android:layout_below="@+id/textViewPassword"
+        android:ems="10"
+        android:layout_marginLeft="30dp"
+        android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/textViewCPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editTextPassword"
+                android:layout_alignLeft="@+id/editTextPassword"
+                android:text="@string/confirmpassword"
+                android:layout_marginLeft="30dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+            <EditText
+                android:id="@+id/editTextCPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textViewCPassword"
+                android:layout_below="@+id/textViewCPassword"
+                android:ems="10"
+                android:layout_marginLeft="30dp"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/buttonSubmit"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/submit"
+                android:layout_below="@+id/editTextPassword"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="40dp"
+                android:layout_alignParentRight="true"
+                android:background="#2196F3"
+                android:textColor="#ffffff"/>
+
+    </LinearLayout>
+
+    </ScrollView>
+
+    </FrameLayout>
+
+</RelativeLayout>

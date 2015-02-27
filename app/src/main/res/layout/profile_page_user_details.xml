@@ -1,0 +1,194 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/myBackgroundColor">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Hi,"
+            android:textColor="@color/Textcolour"
+            android:id="@+id/Profile_Page_Hi"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="41dp"
+            android:layout_marginTop="59dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="*name"
+            android:textColor="@color/Textcolour"
+            android:id="@+id/Profile_Page_Name"
+            android:layout_below="@+id/Profile_Page_Hi"
+            android:layout_toRightOf="@+id/Profile_Page_Hi"
+            android:layout_toEndOf="@+id/Profile_Page_Hi"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Exebit ID:"
+            android:textColor="@color/Textcolour"
+            android:id="@+id/Profile_Page_Id"
+            android:layout_below="@+id/Profile_Page_Name"
+            android:layout_alignRight="@+id/Profile_Page_Name"
+            android:layout_alignEnd="@+id/Profile_Page_Name"
+            android:layout_marginTop="39dp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="College:"
+            android:id="@+id/Profile_Page_College"
+            android:layout_marginTop="39dp"
+            android:textColor="@color/Textcolour"
+            android:layout_below="@+id/Profile_Page_Id"
+            android:layout_alignLeft="@+id/Profile_Page_Id"
+            android:layout_alignStart="@+id/Profile_Page_Id"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Email id:"
+            android:id="@+id/Profile_Page_Email"
+            android:layout_marginTop="41dp"
+            android:textColor="@color/Textcolour"
+            android:layout_below="@+id/Profile_Page_mobile"
+            android:layout_alignLeft="@+id/Profile_Page_College"
+            android:layout_alignStart="@+id/Profile_Page_College"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Accomodation Details"
+            android:id="@+id/Profile_Page_Accom"
+            android:layout_marginTop="41dp"
+            android:textColor="@color/Textcolour"
+            android:layout_below="@+id/Profile_Page_Email"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="hostel:"
+            android:textColor="@color/Textcolour"
+            android:id="@+id/Profile_Page_Hostel"
+            android:layout_below="@+id/Profile_Page_Accom"
+            android:layout_alignLeft="@+id/Profile_Page_Email"
+            android:layout_alignStart="@+id/Profile_Page_Email"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="room no:"
+            android:id="@+id/Profile_Page_Room"
+            android:textColor="@color/Textcolour"
+            android:layout_below="@+id/Profile_Page_Hostel"
+            android:layout_alignLeft="@+id/Profile_Page_Hostel"
+            android:layout_alignStart="@+id/Profile_Page_Hostel"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="*id"
+            android:textColor="@color/Textcolour"
+            android:id="@+id/Profile_Page_Id1"
+            android:layout_alignTop="@+id/Profile_Page_Id"
+            android:layout_alignLeft="@+id/Profile_Page_College1"
+            android:layout_alignStart="@+id/Profile_Page_College1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="*college"
+
+            android:padding="10dp"
+            android:textColor="@color/Textcolour"
+            android:id="@+id/Profile_Page_College1"
+            android:layout_alignTop="@+id/Profile_Page_College"
+            android:layout_alignLeft="@+id/Profile_Page_Email1"
+            android:layout_alignStart="@+id/Profile_Page_Email1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="*email"
+            android:textColor="@color/Textcolour"
+            android:id="@+id/Profile_Page_Email1"
+            android:layout_centerHorizontal="true"
+            android:layout_alignTop="@+id/Profile_Page_Email" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="*hostel"
+            android:textColor="@color/Textcolour"
+            android:id="@+id/Profile_Page_Hostel1"
+            android:layout_below="@+id/Profile_Page_Accom"
+            android:layout_alignLeft="@+id/Profile_Page_Email1"
+            android:layout_alignStart="@+id/Profile_Page_Email1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="*room"
+            android:textColor="@color/Textcolour"
+            android:id="@+id/Profile_Page_Room1"
+            android:layout_below="@+id/Profile_Page_Hostel1"
+            android:layout_alignLeft="@+id/Profile_Page_Hostel1"
+            android:layout_alignStart="@+id/Profile_Page_Hostel1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Mobile:"
+            android:textColor="@color/Textcolour"
+            android:id="@+id/Profile_Page_mobile"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/Profile_Page_Hi"
+            android:layout_alignStart="@+id/Profile_Page_Hi"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="*mobile"
+            android:textColor="@color/Textcolour"
+            android:id="@+id/Profile_Page_mobile1"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/Profile_Page_Email1"
+            android:layout_alignStart="@+id/Profile_Page_Email1" />
+
+    </RelativeLayout>
+</LinearLayout>
