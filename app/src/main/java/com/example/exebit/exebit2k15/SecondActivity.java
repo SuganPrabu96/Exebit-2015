@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
@@ -23,8 +26,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -44,8 +50,6 @@ import navigationDrawer.NavDrawerItem;
 import navigationDrawer.NavDrawerListAdapter;
 import util.data;
 
-//TODO : Change the text of the textview - heading to schedule when he clicks on schedule and to my events when he clicks on my events
-//TODO : create a separate fragment for my events
 public class SecondActivity extends ActionBarActivity {
     private CharSequence mTitle="Exebit";
     private DrawerLayout drawerLayout;
@@ -53,10 +57,25 @@ public class SecondActivity extends ActionBarActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     public static FragmentManager SupportFragmentManager;
     int flag;
+    ImageView profileIcon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_bar);
+
+        profileIcon = (ImageView) findViewById(R.id.profilepic);
+
+        // TODO check if the email ID of the user has an associated profile picture
+       /* if(Main_Activity.gender.equals("Male")) profileIcon.setImageResource(R.drawable.profilemale2);
+        else if(Main_Activity.gender.equals("Female")) profileIcon.setImageResource(R.drawable.profilefemale2);
+*/
+        Window window = SecondActivity.this.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.setStatusBarColor(SecondActivity.this.getResources().getColor(R.color.myStatusBarColor));
+        getSupportActionBar().setTitle("Exebit 2015");
+
+
         getSupportActionBar().setTitle("Exebit 2015");
 
         SupportFragmentManager = getSupportFragmentManager();
@@ -131,7 +150,7 @@ public class SecondActivity extends ActionBarActivity {
            // Toast.makeText(getApplicationContext(),"pos1", Toast.LENGTH_SHORT).show();
         }
         if(position==2){
-            fragmentTransaction.replace(R.id.frame_container, new ScheduleFragment());
+            fragmentTransaction.replace(R.id.frame_container, new MyEventsFragment());
           //  setTitle("pos2");
            // Toast.makeText(getApplicationContext(),"pos2", Toast.LENGTH_SHORT).show();
         }
@@ -140,18 +159,51 @@ public class SecondActivity extends ActionBarActivity {
         }
         if(position==4){
 
-            Main_Activity.userName="";
-            Main_Activity.userId="";
-            Main_Activity.userPassword="";
-            Main_Activity.userMobile="";
-            Main_Activity.userCollege="";
-            Main_Activity.userEmail="";
-            Main_Activity.userHostel="";
-            Main_Activity.userHostelRoom="";
-            Intent i = new Intent(SecondActivity.this,Main_Activity.class);
-            startActivity(i);
-            finish();
-            //TODO : code must be checked to move back to MainActivity.class
+            AlertDialog.Builder builder = new AlertDialog.Builder(SecondActivity.this);
+            builder.setMessage("Are you sure?");
+
+            builder.setNegativeButton("No",new DialogInterface.OnClickListener(){
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Main_Activity.userFullName="";
+                    Main_Activity.userDateOfBirth="";
+                    Main_Activity.userName="";
+                    Main_Activity.userId="";
+                    Main_Activity.gender="";
+                    Main_Activity.userPassword="";
+                    Main_Activity.userMobile="";
+                    Main_Activity.userCollege="";
+                    Main_Activity.userEmail="";
+                    Main_Activity.userHostel="";
+                    Main_Activity.userHostelRoom="";
+
+                    Main_Activity.prefs.edit().putString("userFullName",Main_Activity.userFullName).apply();
+                    Main_Activity.prefs.edit().putString("userDateOfBirth",Main_Activity.userDateOfBirth).apply();
+                    Main_Activity.prefs.edit().putString("userName",Main_Activity.userName).apply();
+                    Main_Activity.prefs.edit().putString("userCollege",Main_Activity.userCollege).apply();
+                    Main_Activity.prefs.edit().putString("userId",Main_Activity.userId).apply();
+                    Main_Activity.prefs.edit().putString("gender",Main_Activity.gender).apply();
+                    Main_Activity.prefs.edit().putString("userPassword",Main_Activity.userPassword).apply();
+                    Main_Activity.prefs.edit().putString("userMobile",Main_Activity.userMobile).apply();
+                    Main_Activity.prefs.edit().putString("userEmail",Main_Activity.userEmail).apply();
+                    Main_Activity.prefs.edit().putString("userHostel",Main_Activity.userHostel).apply();
+                    Main_Activity.prefs.edit().putString("userHostelRoom",Main_Activity.userHostelRoom).apply();
+
+                    Intent i = new Intent(SecondActivity.this,Main_Activity.class);
+                    startActivity(i);
+                    finish();
+                    dialog.cancel();
+                }
+            });
+            builder.create().show();
+
         }
         fragmentTransaction.commit();
         // Highlight the selected item, update the title, and close the drawer
@@ -366,6 +418,63 @@ public class SecondActivity extends ActionBarActivity {
         }
 
         }
+
+    public static class MyEventsFragment extends Fragment{
+
+        public MyEventsFragment() {
+        }
+
+        private static RecyclerView mRecyclerView;
+        private static CardAdapter mAdapter;
+
+        public static String userName="";
+        public static String userId="";
+        public static String passWord="";
+
+        public static SharedPreferences prefs;
+
+        private android.support.v7.widget.Toolbar toolbar;
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_my_events, container, false);
+/*
+            userName = prefs.getString("userName","");
+            userId = prefs.getString("userId","");
+            passWord = prefs.getString("passWord", "");
+*/
+
+            mRecyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
+            mRecyclerView.setHasFixedSize(true);
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
+            ArrayList<ListOfEvents_Event> listofevents = new ArrayList<>();
+            String[] eventtitles,eventschs,eventdescs;
+            eventtitles = new String[]{"Inauguration","Gayle Laakmaan Talk","InMobi Tech Talk","Gaming Night","Puzzle Championship","Hackathon"};
+            eventschs = new String[]{"Mar 2,6:30 PM, CS 25","Mar 2, 6:30 PM, CS 25","Mar 2, 8 PM,CS 25","Mar 2, 9:30 PM, H/W Lab","Mar 3, 8:30 AM, CS 34","Mar 3, 8:30 AM, CS 24,26,34"};
+            eventdescs = new String[]{"Inaugural function of Exebit","A talk by 'The Google Resume' fame Gayle Laakmann","A talk from InMobi Tech","A fierce competition where people battle out their gaming skills","A medley of puzzles in store, unleash the prowess in you and a lot of prize money is up for your grabs","Tackle real-world problems with your app-making skills"};
+
+            ArrayList<String> listofcolors = new ArrayList<>();
+            String[] loc;
+            loc = new String[]{"#00BCD4","#4CAF50","#E91E63","#FFEB3B","#795548"};
+            Random r = new Random();
+            int col = r.nextInt();
+
+            for(int j=0; j < 6; j++) {
+                listofevents.add(new ListOfEvents_Event(eventtitles[j], eventschs[j], eventdescs[j]));
+            }
+
+            mAdapter = new CardAdapter(listofevents, rootView.getContext());
+            mRecyclerView.setAdapter(mAdapter);
+
+            // toolbar = (android.support.v7.widget.Toolbar) rootView.findViewById(R.id.toolbar_actionbar);
+            // setSupportActionBar(toolbar);
+
+            return rootView;
+        }
+    }
 
     public static class FaqFragment extends Fragment {
 

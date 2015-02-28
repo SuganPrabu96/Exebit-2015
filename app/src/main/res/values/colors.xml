@@ -9,6 +9,7 @@
     -->
 
     <color name="myPrimaryColor">#3F51B5</color>
+    <color name="myStatusBarColor">#283593</color>
     <color name="Textcolour">#000000</color>
     <color name="myAccentColor">#ffffff</color>
     <color name="myDrawerBackground">#F2F2F2</color>

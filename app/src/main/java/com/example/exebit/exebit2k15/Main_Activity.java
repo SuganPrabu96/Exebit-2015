@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -15,6 +17,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -35,16 +39,24 @@ import java.util.Calendar;
 
 public class Main_Activity extends ActionBarActivity {
     Dialog myDialog;
-    public SharedPreferences prefs = null;
-    public static String userName,userId,userPassword,userMobile,userCollege,userEmail,userHostel,userHostelRoom;
+    public static SharedPreferences prefs = null;
+    public static String userFullName,userDateOfBirth,userName,gender,userId,userPassword,userMobile,userCollege,userEmail,userHostel,userHostelRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
-        getSupportActionBar().setTitle("Exebit 2015");
+
+            Window window = Main_Activity.this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(Main_Activity.this.getResources().getColor(R.color.myStatusBarColor));
+            getSupportActionBar().setTitle("Exebit 2015");
 
         prefs=getSharedPreferences("Exebit",MODE_PRIVATE);
+        gender="Male";
+        /*userFullName="SuganPrabu";
+        userDateOfBirth="06th Nov 1996";
         userName="Sugan";
         userId="";
         userPassword="SuganPrabu";
@@ -53,6 +65,8 @@ public class Main_Activity extends ActionBarActivity {
         userEmail="suganprabu1996@gmail.com";
         userHostel="Pampa";
         userHostelRoom="651";
+        prefs.edit().putString("userFullName",userFullName).apply();
+        prefs.edit().putString("userDateOfBirth",userDateOfBirth).apply();
         prefs.edit().putString("userName",userName).apply();
         prefs.edit().putString("userCollege",userCollege).apply();
         prefs.edit().putString("userId",userId).apply();
@@ -61,7 +75,7 @@ public class Main_Activity extends ActionBarActivity {
         prefs.edit().putString("userEmail",userEmail).apply();
         prefs.edit().putString("userHostel",userHostel).apply();
         prefs.edit().putString("userHostelRoom",userHostelRoom).apply();
-        if(!prefs.getString("userId","").equals(""))
+        */if(!prefs.getString("userId","").equals(""))
            {
                Intent i = new Intent(Main_Activity.this,SecondActivity.class);
                i.putExtra("Login status",1);
@@ -87,20 +101,17 @@ public class Main_Activity extends ActionBarActivity {
 
             @Override
             public void onAnimationStart(Animation animation) {
-                // TODO Auto-generated method stub
 
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-                // TODO Auto-generated method stub
 
             }
 
             @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
             @Override
             public void onAnimationEnd(Animation animation) {
-                // TODO Auto-generated method stub
                 iv.animate().alpha(1f).setDuration(1000).start();
                 b1.animate().alpha(1f).setDuration(1000).start();
                 b2.animate().alpha(1f).setDuration(1000).start();
@@ -135,7 +146,6 @@ public class Main_Activity extends ActionBarActivity {
 
             @Override
             public void onClick(View arg0) {
-                // TODO Auto-generated method stub
                 Intent intent = new Intent(Main_Activity.this,SecondActivity.class);
                 intent.putExtra("Login status",0);
                 startActivity(intent);
@@ -163,30 +173,44 @@ public class Main_Activity extends ActionBarActivity {
             {
                 String strUserName = name.getText().toString();
                 String strPassword = password.getText().toString();
+                userFullName = "Sugan";
+                gender="Male";
 
-                if(!(strUserName.equals("")||strPassword.equals(""))) {
-                    //TODO : make a database request and give a result
-                    boolean isValidated;
-                    if(strUserName.equals("sugan")&&strPassword.equals("don")) {
-                        isValidated = true;
-                    }
-                    else {
-                        isValidated = false;
-                        //TODO : convert it the google way
-                        Toast.makeText(getApplicationContext(),"Invalid Credentials",Toast.LENGTH_SHORT).show();
-                    }
+                 //TODO : from the database get all the user details namely username,password,college,gender,userID,Mobile,Email,Hostel,HostelRoom
 
-                    if(isValidated) {
-                        Intent intent = new Intent(Main_Activity.this, SecondActivity.class);
-                        intent.putExtra("Login status",1);
+                    if (!(strUserName.equals("") || strPassword.equals(""))) {
+                        //TODO : make a database request and give a result
+                        boolean isValidated;
+                        if (strUserName.equals("sugan") && strPassword.equals("don")) {
+                            isValidated = true;
+                            prefs.edit().putString("userFullName",userFullName).apply();
+                            prefs.edit().putString("userName", strUserName).apply();
+                            prefs.edit().putString("userCollege", userCollege).apply();
+                            prefs.edit().putString("userId", userId).apply();
+                            prefs.edit().putString("gender",gender).apply();
+                            prefs.edit().putString("userPassword", strPassword).apply();
+                            prefs.edit().putString("userMobile", userMobile).apply();
+                            prefs.edit().putString("userEmail", userEmail).apply();
+                            prefs.edit().putString("userHostel", userHostel).apply();
+                            prefs.edit().putString("userHostelRoom", userHostelRoom).apply();
+                        } else {
+                            isValidated = false;
+                            Toast.makeText(getApplicationContext(), "The username or password you entered is incorrect", Toast.LENGTH_SHORT).show();
+                        }
 
-                        //TODO : make a database request and populate my events with the user events
+                        if (isValidated) {
+                            Intent intent = new Intent(Main_Activity.this, SecondActivity.class);
+                            intent.putExtra("Login status", 1);
 
-                        startActivity(intent);
-                        finish();
-                    }
+                            //TODO : make a database request and populate my events with the user events
+
+                            startActivity(intent);
+                            finish();
+                        }
+                    } else if(strUserName.equals(""))
+                        Toast.makeText(getApplicationContext(), "Enter your username", Toast.LENGTH_SHORT).show();
+                else Toast.makeText(getApplicationContext(),"Enter your password",Toast.LENGTH_SHORT).show();
                 }
-            }
         });
     }
 

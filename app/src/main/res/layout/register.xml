@@ -73,12 +73,14 @@
 
     <ImageButton
         android:id="@+id/imageButtonCalendar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="75dp"
         android:layout_below="@+id/textViewDateOfBirth"
         android:layout_alignLeft="@+id/textViewDateOfBirth"
         android:layout_marginLeft="30dp"
-        android:src="@drawable/ic_launcher"
+        android:src="@drawable/calendar"
+        android:background="@color/myBackgroundColor"
+        android:scaleType="fitXY"
         android:onClick="showDatePickerDialog"/>
 
     <TextView
@@ -113,11 +115,33 @@
     </EditText>
 
     <TextView
+      android:id="@+id/textViewGender"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:layout_marginLeft="30dp"
+      android:text="@string/gender"
+      android:textAppearance="?android:attr/textAppearanceMedium"
+      android:layout_below="@+id/textViewCollegeName" />
+
+    <Spinner
+      android:id="@+id/spinnerGender"
+      android:layout_width="220dp"
+      android:layout_height="40dp"
+      android:background="@android:drawable/btn_dropdown"
+      android:spinnerMode="dropdown"
+      android:layout_alignRight="@+id/editTextCollegeName"
+      android:layout_below="@+id/textViewGender"
+      android:layout_alignLeft="@+id/textViewGender"
+      android:layout_marginLeft="30dp"  />
+
+    <TextView
         android:id="@+id/textViewPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextCollegeName"
-        android:layout_alignLeft="@+id/editTextCollegeName"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/spinnerGender"
+        android:layout_alignLeft="@+id/spinnerGender"
         android:layout_marginLeft="30dp"
         android:text="@string/phoneNumber"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
@@ -169,7 +193,8 @@
         android:layout_alignLeft="@+id/textViewUserName"
         android:layout_below="@+id/textViewUserName"
         android:layout_marginLeft="30dp"
-        android:ems="10"/>
+        android:ems="10"
+        android:inputType="textPersonName"/>
 
     <TextView
         android:id="@+id/textViewPassword"

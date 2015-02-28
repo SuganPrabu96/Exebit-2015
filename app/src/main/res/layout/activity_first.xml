@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button2"
         android:background="@color/myPrimaryColor"
-        android:layout_marginTop="63dp"
+        android:layout_marginTop="45dp"
         android:text="@string/register"
         android:textColor="#ffffff"/>
 
@@ -48,7 +48,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@color/myPrimaryColor"
-        android:layout_marginTop="385dp"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="45dp"
         android:text="@string/later"
         android:textColor="#ffffff" />
 

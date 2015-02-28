@@ -27,7 +27,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="1000dp"
+                android:layout_height="match_parent"
                 android:paddingBottom="@dimen/activity_vertical_margin"
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
@@ -39,12 +39,13 @@
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="FAQ"
                     android:textStyle="bold"
-                    android:textColor="@color/Textcolour"
+                    android:textColor="@color/myPrimaryColor"
                     android:id="@+id/Profile_Page_faq"
-                    android:layout_marginTop="41dp"
-                    android:textSize="32sp"
+                    android:textSize="30sp"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:paddingTop="10dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
