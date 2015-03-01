@@ -10,10 +10,31 @@
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"/>
 
     <!-- Listview to display slider menu -->
+
+    <RelativeLayout
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:orientation="vertical"
+        android:clickable="true"
+        >
+
+        <ImageView
+            android:layout_width="220dp"
+            android:layout_height="100dp"
+            android:id="@+id/profilepic"
+            android:scaleType="fitXY"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentTop="true"
+            android:clickable="false"
+            android:src="@drawable/profilemale2"
+            android:background="@color/myBackgroundColor" />
 
     <ListView
         android:id="@+id/list_slidermenu"
@@ -22,8 +43,11 @@
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
         android:divider="#000000"
+        android:layout_below="@+id/profilepic"
         android:dividerHeight="1dp"
         android:listSelector="#444444"
-        android:background="#FFFFFF"/>
+        android:background="#FFFFFF">
+    </ListView>
 
+    </RelativeLayout>
 </android.support.v4.widget.DrawerLayout>

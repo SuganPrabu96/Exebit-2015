@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -64,11 +65,16 @@ public class SecondActivity extends ActionBarActivity {
         setContentView(R.layout.nav_bar);
 
         profileIcon = (ImageView) findViewById(R.id.profilepic);
-
         // TODO check if the email ID of the user has an associated profile picture
-       /* if(Main_Activity.gender.equals("Male")) profileIcon.setImageResource(R.drawable.profilemale2);
-        else if(Main_Activity.gender.equals("Female")) profileIcon.setImageResource(R.drawable.profilefemale2);
-*/
+
+        if(Main_Activity.decodeBase64(Main_Activity.prefs.getString("userProPic",null)).equals(null)) {
+            if (Main_Activity.gender.equals("Male"))
+                profileIcon.setImageResource(R.drawable.profilemale2);
+            else if (Main_Activity.gender.equals("Female"))
+                profileIcon.setImageResource(R.drawable.profilefemale2);
+        }
+
+        else profileIcon.setImageBitmap(Main_Activity.profilePicture);
         Window window = SecondActivity.this.getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -80,7 +86,7 @@ public class SecondActivity extends ActionBarActivity {
 
         SupportFragmentManager = getSupportFragmentManager();
 
-        List<NavDrawerItem> datalist = null; /*= new LinkedList<>(Arrays.asList(data.navtitles));*/
+        List<NavDrawerItem> datalist = null;
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.frame_container, new ScheduleFragment());
@@ -93,7 +99,7 @@ public class SecondActivity extends ActionBarActivity {
             datalist = data.getNavDrawerItemsNotLoggedIn();
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerList = (ListView) findViewById(R.id.list_slidermenu);
-        // Set the adapter for the list view
+
         drawerList.setAdapter(new NavDrawerListAdapter(getApplicationContext(),datalist));
         // Set the list's click listener
         drawerList.setOnItemClickListener(new DrawerItemClickListener());
@@ -113,11 +119,12 @@ public class SecondActivity extends ActionBarActivity {
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+
           //      setTitle(mTitle);
             }
         };
         drawerLayout.setDrawerListener(mDrawerToggle);
-       /* getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        /* getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setIcon(R.drawable.ic_drawer);*/
     }
@@ -150,7 +157,10 @@ public class SecondActivity extends ActionBarActivity {
            // Toast.makeText(getApplicationContext(),"pos1", Toast.LENGTH_SHORT).show();
         }
         if(position==2){
-            fragmentTransaction.replace(R.id.frame_container, new MyEventsFragment());
+            if(flag==1)
+                fragmentTransaction.replace(R.id.frame_container, new MyEventsFragment());
+            else
+                fragmentTransaction.replace(R.id.frame_container,new SponsorsFragment());
           //  setTitle("pos2");
            // Toast.makeText(getApplicationContext(),"pos2", Toast.LENGTH_SHORT).show();
         }
@@ -158,6 +168,9 @@ public class SecondActivity extends ActionBarActivity {
             fragmentTransaction.replace(R.id.frame_container,new FaqFragment());
         }
         if(position==4){
+            fragmentTransaction.replace(R.id.frame_container,new SponsorsFragment());
+        }
+        if(position==5){
 
             AlertDialog.Builder builder = new AlertDialog.Builder(SecondActivity.this);
             builder.setMessage("Are you sure?");
@@ -183,6 +196,8 @@ public class SecondActivity extends ActionBarActivity {
                     Main_Activity.userEmail="";
                     Main_Activity.userHostel="";
                     Main_Activity.userHostelRoom="";
+                    Main_Activity.profilePicture=null;
+                    Main_Activity.profilePic=null;
 
                     Main_Activity.prefs.edit().putString("userFullName",Main_Activity.userFullName).apply();
                     Main_Activity.prefs.edit().putString("userDateOfBirth",Main_Activity.userDateOfBirth).apply();
@@ -195,6 +210,7 @@ public class SecondActivity extends ActionBarActivity {
                     Main_Activity.prefs.edit().putString("userEmail",Main_Activity.userEmail).apply();
                     Main_Activity.prefs.edit().putString("userHostel",Main_Activity.userHostel).apply();
                     Main_Activity.prefs.edit().putString("userHostelRoom",Main_Activity.userHostelRoom).apply();
+                    Main_Activity.prefs.edit().putString("userProPic",Main_Activity.encodeTobase64(Main_Activity.profilePicture));
 
                     Intent i = new Intent(SecondActivity.this,Main_Activity.class);
                     startActivity(i);
@@ -485,6 +501,57 @@ public class SecondActivity extends ActionBarActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_faq, container, false);
+            return rootView;
+        }
+    }
+
+    public static class SponsorsFragment extends Fragment {
+
+        public SponsorsFragment() {
+        }
+
+        ImageView titleSponsor,eventSponsor1,eventSponsor2;
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_sponsors, container, false);
+
+            titleSponsor = (ImageView) rootView.findViewById(R.id.title_sponsor);
+            eventSponsor1 = (ImageView) rootView.findViewById(R.id.event_sponsor1);
+            eventSponsor2 = (ImageView) rootView.findViewById(R.id.event_sponsor2);
+
+            titleSponsor.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    Uri uri = Uri.parse("http://www.247-inc.com/");
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    startActivity(intent);
+                }
+            });
+
+            eventSponsor1.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    Uri uri = Uri.parse("http://www.flipkart.com/");
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    startActivity(intent);
+                }
+            });
+
+            eventSponsor2.setOnClickListener(new View.OnClickListener() {
+
+                public void onClick(View v) {
+                    Uri uri = Uri.parse("http://www.latentview.com/");
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                    startActivity(intent);
+                }
+            });
             return rootView;
         }
     }

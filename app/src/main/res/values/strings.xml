@@ -15,7 +15,7 @@
     <string name="register">Register</string>
     <string name="login">Login</string>
     <string name="registration">Registration</string>
-    <string name="name">Full Name:</string>
+    <string name="name">Username:</string>
     <string name="birthdate">Date of Birth:</string>
     <string name="college">College Name:</string>
     <string name="gender">Gender:</string>
@@ -26,6 +26,7 @@
     <string name="userName">User Name:</string>
     <string name="remember">Remember Me</string>
     <string name="submit">Submit</string>
-    <string name="later">Not Now</string>/>
+    <string name="later">Not Now</string>
+/>    <string name="title_activity_sponsors_fragment">SponsorsFragment</string>
 
 </resources>
