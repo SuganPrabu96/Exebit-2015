@@ -7,11 +7,28 @@
         android:layout_height="fill_parent"
         android:fillViewport="true"
         >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_margin="20dp">
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="-40dp"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:id="@+id/textViewt9"
+                    android:text="Profile details"
+                    android:textSize="30sp"/>
+            </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,7 +37,6 @@
             <TextView
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:id="@+id/textViewt1"
                 android:text="Name"
                 android:textSize="30sp"/>
@@ -40,18 +56,122 @@
             <TextView
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:id="@+id/textViewt2"
-                android:text="Exebit ID"
+                android:text="Gender"
                 android:textSize="30sp"/>
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/profilepage_id"
+                android:id="@+id/profilepage_gender"
                 android:text="Name : "
                 android:textSize="30sp"
                 android:layout_marginLeft="10dp"/>
         </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewt3"
+                    android:text="College"
+                    android:textSize="30sp"/>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profilepage_college"
+                    android:text="Name : "
+                    android:textSize="30sp"
+                    android:layout_marginLeft="10dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewt4"
+                    android:text="Mobile"
+                    android:textSize="30sp"/>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profilepage_mobile"
+                    android:text="Name : "
+                    android:textSize="30sp"
+                    android:layout_marginLeft="10dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewt5"
+                    android:text="Email"
+                    android:textSize="30sp"/>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profilepage_email"
+                    android:text="Name : "
+                    android:textSize="30sp"
+                    android:layout_marginLeft="10dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="-40dp"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:id="@+id/textViewt8"
+                    android:text="Accomodation Details"
+                    android:textSize="30sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewt6"
+                    android:text="Hostel"
+                    android:textSize="30sp"/>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profilepage_hostel"
+                    android:text="Name : "
+                    android:textSize="30sp"
+                    android:layout_marginLeft="10dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textViewt7"
+                    android:text="Room No"
+                    android:textSize="30sp"/>
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profilepage_roomno"
+                    android:text="Name : "
+                    android:textSize="30sp"
+                    android:layout_marginLeft="10dp"/>
+            </LinearLayout>
         </LinearLayout>
         <!--username,password,college,gender,userID,Mobile,Email,Hostel,HostelRoom-->
 </ScrollView>
