@@ -45,7 +45,7 @@
         android:layout_below="@+id/textViewHeading"
         android:layout_marginLeft="30dp"
         android:paddingTop="15dp"
-        android:text="@string/name"
+        android:text="Name:"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <EditText

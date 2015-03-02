@@ -3,7 +3,9 @@ package ProfilePage_ActionTab;
  * Created by Suganprabu on 07-02-2015.
  */
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -46,18 +48,22 @@ public class Profile_Page_ChangePassword extends Fragment {
     }
     public void changepassword()
     {
+        SharedPreferences pref1 = getActivity().getSharedPreferences("Exebit",Context.MODE_PRIVATE);
+        String userOldPassword = pref1.getString("userPassword","");
         if(old_password.getText().toString().equals(Main_Activity.userPassword) && !(old_password.getText().toString().equals("")) && !(old_password.getText().toString().length()<8))
         {
             //SecondActivity.ProfilePageFragment.prefs.edit().putString("passWord",new_password.getText().toString()).commit();
-            Main_Activity.userPassword=new_password.getText().toString();
-            Toast.makeText(getActivity(), "Password changed", Toast.LENGTH_SHORT).show();
+            //Main_Activity.userPassword=new_password.getText().toString();
+            pref1.edit().putString("userPassword", new_password.getText().toString());
+            pref1.edit().commit();
+            Toast.makeText(getActivity(), "Your password has been changed successfully.", Toast.LENGTH_SHORT).show();
         }
-        else if(!old_password.getText().toString().equals(Main_Activity.userPassword))
+        else if(!old_password.getText().toString().equals(userOldPassword))
         {
             AlertDialog.Builder b1 = new AlertDialog.Builder(getActivity());
-            b1.setTitle("Incorrect Old Password");
-            b1.setTitle("Check your entered old password");
-            b1.setNeutralButton("Ok",new DialogInterface.OnClickListener(){
+            b1.setTitle("Incorrect Password");
+            b1.setMessage("Check the password you entered.");
+            b1.setNeutralButton("OK",new DialogInterface.OnClickListener(){
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();

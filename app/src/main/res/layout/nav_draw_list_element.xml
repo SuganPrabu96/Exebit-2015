@@ -3,9 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="60dp">
 
+
     <ImageView
         android:id="@+id/icon"
-        android:layout_width="25dp"
+        android:layout_width="30dp"
         android:layout_height="30dp"
         android:scaleType="fitXY"
         android:layout_alignParentLeft="true"
@@ -22,7 +23,7 @@
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:text="jahckjacb"
         android:textAllCaps="true"
-        android:textColor="#000000"
+        android:textColor="#888888"
         android:gravity="center_vertical|center_horizontal"
         android:layout_centerHorizontal="true"
      />

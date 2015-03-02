@@ -12,6 +12,9 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     public TextView tvtitle;
     public TextView tvsch;
     public TextView tvdesc;
+    public TextView tvcateg;
+    public View back;
+
 
     public ViewHolder(Context context, View itemView) {
         super(itemView);
@@ -19,5 +22,6 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         tvtitle = (TextView) itemView.findViewById(R.id.texttit);
         tvsch = (TextView) itemView.findViewById(R.id.textsch);
         tvdesc = (TextView) itemView.findViewById(R.id.textdesc);
-
+        tvcateg = (TextView) itemView.findViewById(R.id.textcateg);
+        back = (View) itemView.findViewById(R.id.back);
     }}

@@ -33,8 +33,18 @@ public class Register extends ActionBarActivity implements AdapterView.OnItemSel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-        final TextView DOB;
+        final TextView DOB,textViewFullName,textViewDateOfBirth,textViewCollegeName,textViewGender,textViewPhone,textViewEmail,textViewUserName,textViewPassword,textViewCPassword;;
         final EditText fName,cName,pNumber,eId,uName,pWord,confirm_pWord;
+
+        textViewFullName = (TextView) findViewById(R.id.textViewFullName);
+        textViewDateOfBirth = (TextView) findViewById(R.id.textViewDateOfBirth);
+        textViewCollegeName = (TextView) findViewById(R.id.textViewCollegeName);
+        textViewGender = (TextView) findViewById(R.id.textViewGender);
+        textViewPhone = (TextView) findViewById(R.id.textViewPhone);
+        textViewEmail = (TextView) findViewById(R.id.textViewEmail);
+        textViewUserName = (TextView) findViewById(R.id.textViewUserName);
+        textViewPassword = (TextView) findViewById(R.id.textViewPassword);
+        textViewCPassword = (TextView) findViewById(R.id.textViewCPassword);
 
         spinner = (Spinner)findViewById(R.id.spinnerGender);
         ArrayAdapter<String>adapter = new ArrayAdapter<String>(Register.this,
@@ -71,20 +81,27 @@ public class Register extends ActionBarActivity implements AdapterView.OnItemSel
 
                 Log.d("t", fullName);
 
-                if(fullName.equals(""))
-                    Toast.makeText(getApplicationContext(),"Please enter your full name",Toast.LENGTH_SHORT).show();
+                if(fullName.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter your full name", Toast.LENGTH_SHORT).show();
+                    //textViewFullName;
+                }
 
-                else if(dateOfBirth.equals(""))
-                    Toast.makeText(getApplicationContext(),"Please choose your date of birth",Toast.LENGTH_SHORT).show();
+                else if(dateOfBirth.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please choose your date of birth", Toast.LENGTH_SHORT).show();
+                }
 
-                else if(collegeName.equals(""))
-                    Toast.makeText(getApplicationContext(),"Please enter your college name",Toast.LENGTH_SHORT).show();
+                else if(collegeName.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter your college name", Toast.LENGTH_SHORT).show();
+                    //cName.setBackgroundColor(getResources().getColor(R.color.myNavigationBarProPicBackgroundColor));
+                }
 
                 else if(gender.equals(""))
                     Toast.makeText(getApplicationContext(),"Please select your gender",Toast.LENGTH_SHORT).show();
 
-                else if(phoneNumber.equals(""))
-                    Toast.makeText(getApplicationContext(),"Please enter your phone number",Toast.LENGTH_SHORT).show();
+                else if(phoneNumber.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Please enter your phone number", Toast.LENGTH_SHORT).show();
+                  //  pNumber.setBackgroundColor(getResources().getColor(R.color.myNavigationBarProPicBackgroundColor));
+                }
 
                 else if(emailId.equals(""))
                     Toast.makeText(getApplicationContext(),"Please enter your email id",Toast.LENGTH_SHORT).show();

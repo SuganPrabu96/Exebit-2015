@@ -56,6 +56,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Calendar;
 
+import util.ConnectionDetector;
+
 public class Main_Activity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
     Dialog myDialog;
     public GoogleApiClient mGoogleApiClient;
@@ -67,6 +69,8 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
     private static final int PROFILE_PIC_SIZE = 400;
     private boolean mSignInClicked;
 
+    public static ConnectionDetector internetConnection;
+
     private ConnectionResult mConnectionResult;
     public static String userFullName,userProPic,userDateOfBirth,userName,gender,userId,userPassword,userMobile,userCollege,userEmail,userHostel,userHostelRoom;
 
@@ -75,6 +79,7 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
+        internetConnection = new ConnectionDetector(getApplicationContext());
             Window window = Main_Activity.this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -106,14 +111,20 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
         prefs.edit().putString("userHostelRoom",userHostelRoom).apply();
         */
 
-        if(userEmail.equals("")&&userProPic.equals(""))
-            {getUserProPic();
-             BitmapDrawable pro_pic = (BitmapDrawable) profilePic.getDrawable();
-             profilePicture = pro_pic.getBitmap();
-             prefs.edit().putString("userProPic", encodeTobase64(profilePicture)).apply();
-            }
-        else profilePicture = decodeBase64(prefs.getString("userProPic", null));
-        if(!prefs.getString("userId","").equals(""))
+        if(userEmail.equals(""))
+            {getProfileInformation();
+            BitmapDrawable pro_pic = (BitmapDrawable) profilePic.getDrawable();
+            profilePicture = pro_pic.getBitmap();
+            prefs.edit().putString("userProPic", encodeTobase64(profilePicture)).apply();
+        }
+        else {
+           // profilePicture = decodeBase64(prefs.getString("userProPic", null));
+            getProfileInformation();
+           /* BitmapDrawable pro_pic = (BitmapDrawable) profilePic.getDrawable();
+            profilePicture = pro_pic.getBitmap();
+            Log.d("t",encodeTobase64(profilePicture));*/
+        }
+        if(!prefs.getString("userFullName","").equals(""))
            {
                Intent i = new Intent(Main_Activity.this,SecondActivity.class);
                i.putExtra("Login status",1);
@@ -166,8 +177,11 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
         b1.setOnClickListener(new OnClickListener() {
 
             public void onClick(View arg0) {
-                Intent intent= new Intent(Main_Activity.this,Register.class);
-                startActivity(intent);
+                if(internetConnection.isConnectingToInternet()==true)
+                {Intent intent= new Intent(Main_Activity.this,Register.class);
+                startActivity(intent);}
+                else
+                    Toast.makeText(getApplicationContext(),"Network error. Check your network connection",Toast.LENGTH_SHORT).show();
             }
         });
         //String error;
@@ -177,7 +191,10 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
 
             public void onClick(View arg0) {
 
-                callLoginDialog();
+                if(internetConnection.isConnectingToInternet()==true)
+                    callLoginDialog();
+                else
+                    Toast.makeText(getApplicationContext(),"Network error. Check your network connection",Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -222,7 +239,7 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
 
     private void callLoginDialog()
     {
-
+        myDialog.setTitle("");
         myDialog.setContentView(R.layout.login);
         myDialog.setCancelable(true);
         Button login = (Button) myDialog.findViewById(R.id.button1);
@@ -248,7 +265,7 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
                     if (!(strUserName.equals("") || strPassword.equals(""))) {
                         //TODO : make a database request and give a result
                         boolean isValidated;
-                        if (strUserName.equals("sugan") && strPassword.equals("don")) {
+                        if (strUserName.equals("sugan") && strPassword.equals("exebit")) {
                             isValidated = true;
                             prefs.edit().putString("userFullName",userFullName).apply();
                             prefs.edit().putString("userName", strUserName).apply();
@@ -283,17 +300,15 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
         });
     }
 
-    public void getUserProPic(){
-        getProfileInformation();
-    }
-
     protected void onStart() {
         super.onStart();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this).addApi(Plus.API, null)
+                .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
-        mGoogleApiClient.connect();
+        if(!mGoogleApiClient.equals(null))
+            mGoogleApiClient.connect();
+        Log.d("t1","Inside onStart");
     }
 
     protected void onStop() {
@@ -342,13 +357,11 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
                 String personPhotoUrl = null;
                 String personGooglePlusProfile = null;
                 String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
-                        if(email.equals(userEmail)) {
-                            personName = currentPerson.getDisplayName();
+                personName = currentPerson.getDisplayName();
                             personPhotoUrl = currentPerson.getImage().getUrl();
                             personGooglePlusProfile = currentPerson.getUrl();
-                          }
 
-
+                Log.d("URL",personPhotoUrl);
                 // by default the profile url gives 50x50 px image only
                 // we can replace the value with whatever dimension we want by
                 // replacing sz=X
