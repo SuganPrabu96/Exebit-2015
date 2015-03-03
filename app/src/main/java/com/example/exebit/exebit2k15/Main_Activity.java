@@ -93,7 +93,7 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
         /*userFullName="SuganPrabu";
         userDateOfBirth="06th Nov 1996";
         userName="Sugan";
-        userId="";
+        userId="EE14B060";
         userPassword="SuganPrabu";
         userMobile="9940246940";
         userCollege="IITM";
@@ -108,8 +108,7 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
         prefs.edit().putString("userMobile",userMobile).apply();
         prefs.edit().putString("userEmail",userEmail).apply();
         prefs.edit().putString("userHostel",userHostel).apply();
-        prefs.edit().putString("userHostelRoom",userHostelRoom).apply();
-        */
+        prefs.edit().putString("userHostelRoom",userHostelRoom).apply();*/
 
         if(userEmail.equals(""))
             {getProfileInformation();

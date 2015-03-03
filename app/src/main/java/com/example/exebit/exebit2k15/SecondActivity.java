@@ -31,10 +31,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewManager;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -61,6 +63,7 @@ import navigationDrawer.NavDrawerItem;
 import navigationDrawer.NavDrawerListAdapter;
 import util.data;
 
+// TODO for fragment 2 in profile page ask if we can display the competitions in which the user has won something
 public class SecondActivity extends ActionBarActivity {
     private CharSequence mTitle="Exebit";
     private DrawerLayout drawerLayout;
@@ -68,10 +71,12 @@ public class SecondActivity extends ActionBarActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     public static FragmentManager SupportFragmentManager;
     int flag;
+    public static SharedPreferences prefs;
     public static int profile_flag;
     public FragmentTransaction fragmentTransaction;
     CircleImageView profileIcon;
     TextView profileIconText;
+    public static String userFullName,userProPic,userDateOfBirth,userName,gender,userId,userPassword,userMobile,userCollege,userEmail,userHostel,userHostelRoom;
     String[] actions = new String[] {"All",
             "March 14th",
             "March 15th",
@@ -82,6 +87,8 @@ public class SecondActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_bar);
+
+        prefs = getSharedPreferences("Exebit",MODE_PRIVATE);
 
         {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_dropdown_item, actions);
@@ -283,6 +290,7 @@ public class SecondActivity extends ActionBarActivity {
         // Insert the fragment by replacing any existing fragment
         final FragmentManager fragmentManager = getSupportFragmentManager();
         final FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        final Fragment f = fragmentManager.findFragmentById(R.id.frame_container);
         //if(fragmentTransaction.r))
         if (position != 0) {
             FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(0,0,0);
@@ -302,7 +310,7 @@ public class SecondActivity extends ActionBarActivity {
             getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
             if(flag==1) {
                 fragmentTransaction.replace(R.id.frame_container, new ProfilePageFragment());
-               // ProfilePageFragment.mViewPager.setCurrentItem(0);
+                // ProfilePageFragment.mViewPager.setCurrentItem(0);
             }
             else
                 fragmentTransaction.replace(R.id.frame_container, new HospitalityFragment());
@@ -344,7 +352,7 @@ public class SecondActivity extends ActionBarActivity {
             getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         }
         if(position==6){
-            final Fragment f = fragmentManager.findFragmentById(R.id.frame_container);
+            //final Fragment f = fragmentManager.findFragmentById(R.id.frame_container);
             getSupportActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
             getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
             AlertDialog.Builder builder = new AlertDialog.Builder(SecondActivity.this);
@@ -609,23 +617,22 @@ public class SecondActivity extends ActionBarActivity {
         EditText old_password;
         EditText new_password;
 
+        Button submit;
+
         CustomPagerAdapter mCustomPagerAdapter;
         public static ViewPager mViewPager;
         public static MaterialTabHost tabHost;
+
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_profile_page_main_page, container, false);
-            /*prefs = getSharedPreferences("Exebit", MODE_PRIVATE);
-            prefs.edit().putString("userName", "");
-            prefs.edit().putString("userId","");
-            prefs.edit().putString("userPassword","");
-            userName = prefs.getString("userName","");
-            userId = prefs.getString("userId","");
-            passWord = prefs.getString("passWord","");
-            */old_password = (EditText) rootView.findViewById(R.id.old_password_edit);
+            old_password = (EditText) rootView.findViewById(R.id.old_password_edit);
             new_password = (EditText) rootView.findViewById(R.id.new_password_edit);
+            submit = (Button) rootView.findViewById(R.id.submit_change_password);
+
+            userPassword = prefs.getString("userPassword","");
 
             mCustomPagerAdapter = new CustomPagerAdapter(SupportFragmentManager);
 
@@ -661,6 +668,20 @@ public class SecondActivity extends ActionBarActivity {
             );
 
             mViewPager.setCurrentItem(0);
+
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(userPassword.equals(old_password.getText().toString()))
+                    {
+                        userPassword = new_password.getText().toString();
+                        // TODO update the database with the new password
+                        Toast.makeText(getActivity().getApplicationContext(),"Password changed",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                        Toast.makeText(getActivity().getApplicationContext(),"Check your current password",Toast.LENGTH_SHORT).show();
+                }
+            });
             return rootView;
         }
 
