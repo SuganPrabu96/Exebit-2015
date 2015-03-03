@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="0dp"
+    tools:context="com.example.exebit.exebit.Sponsors"
+    android:background="@color/myBackgroundColor">
+
+    <TextView
+        android:id="@+id/textViewSponsors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="#00355644"
+        android:text="Sponsors"
+        android:textColor="@color/myPrimaryColor"
+        android:textStyle="bold"
+        android:textSize="30sp">
+    </TextView>
+
+    <!--<android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
+        android:id="@+id/card_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_below="@id/textViewSponsors"
+        android:clickable="true"
+        android:paddingTop="0dp"
+
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="5dp"
+        card_view:contentPadding="0dp">
+
+
+    </android.support.v7.widget.CardView>-->
+
+    <ImageView
+            android:id="@+id/title_sponsor"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="20dp"
+            android:adjustViewBounds="true"
+            android:background="@color/myBackgroundColor"
+            android:src="@drawable/title_sponsor"
+            android:layout_below="@+id/textViewSponsors"
+            android:scaleType="fitXY"
+            android:clickable="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="25dp"
+        android:text="24 by 7, Inc."
+        android:id="@+id/textViewTitleSponsor"
+        android:layout_toRightOf="@+id/title_sponsor"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/textViewSponsors"
+        android:layout_alignBottom="@+id/title_sponsor"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/myPrimaryColor"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="25dp"
+        android:text="TITLE SPONSOR"
+        android:id="@+id/textViewTitle_Sponsor"
+        android:layout_toRightOf="@+id/title_sponsor"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/textViewTitleSponsor"
+        android:layout_alignTop="@+id/textViewTitleSponsor"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/mySponsorColor"/>
+
+    <ImageView
+        android:id="@+id/event_sponsor1"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_below="@+id/title_sponsor"
+        android:adjustViewBounds="true"
+        android:background="@color/myBackgroundColor"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/event_sponsor"
+        android:scaleType="fitXY"
+        android:clickable="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="25dp"
+        android:text="
+
+Flipkart.com"
+        android:id="@+id/textViewEventSponsor1"
+        android:layout_toRightOf="@+id/event_sponsor1"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/textViewTitleSponsor"
+        android:layout_alignBottom="@+id/event_sponsor1"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/myPrimaryColor"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="25dp"
+        android:text="EVENT SPONSOR"
+        android:id="@+id/textViewEvent_Sponsor1"
+        android:textColor="@color/mySponsorColor"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/event_sponsor1"
+        android:layout_toEndOf="@+id/event_sponsor1" />
+
+    <ImageView
+        android:id="@+id/event_sponsor2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/event_sponsor1"
+        android:layout_marginTop="50dp"
+        android:adjustViewBounds="true"
+        android:background="@color/myBackgroundColor"
+        android:src="@drawable/event_sponsor2"
+        android:scaleType="fitXY"
+        android:clickable="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="25dp"
+        android:text="
+LatentView Analytics"
+        android:id="@+id/textViewEventSponsor2"
+        android:layout_toRightOf="@+id/event_sponsor2"
+        android:layout_marginTop="70dp"
+        android:layout_below="@+id/textViewEventSponsor1"
+        android:layout_alignBottom="@+id/event_sponsor2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/myPrimaryColor"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="25dp"
+        android:text="EVENT SPONSOR"
+        android:id="@+id/textViewEvent_Sponsor2"
+        android:textColor="@color/mySponsorColor"
+        android:layout_alignBottom="@+id/textViewEventSponsor2"
+        android:layout_toRightOf="@+id/event_sponsor2"
+        android:layout_toEndOf="@+id/event_sponsor2"
+        android:layout_marginBottom="43dp" />
+
+
+</RelativeLayout>
+
