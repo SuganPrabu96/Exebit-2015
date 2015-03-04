@@ -56,6 +56,9 @@
         android:layout_marginLeft="30dp"
         android:layout_below="@+id/textViewFullName"
         android:ems="10"
+        android:textColor="#000"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"
         android:inputType="textPersonName" />
 
 
@@ -110,6 +113,9 @@
         android:layout_alignLeft="@+id/textViewCollegeName"
         android:layout_below="@+id/textViewCollegeName"
         android:ems="10"
+        android:textColor="#000"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"
         android:inputType="textPersonName" >
 
         <requestFocus />
@@ -125,7 +131,7 @@
       android:textAppearance="?android:attr/textAppearanceMedium"
       android:layout_below="@+id/textViewCollegeName" />
 
-    <Spinner
+    <!--<Spinner
       android:id="@+id/spinnerGender"
       android:layout_width="220dp"
       android:layout_height="40dp"
@@ -134,15 +140,43 @@
       android:layout_alignRight="@+id/editTextCollegeName"
       android:layout_below="@+id/textViewGender"
       android:layout_alignLeft="@+id/textViewGender"
-      android:layout_marginLeft="30dp"  />
+      android:layout_marginLeft="30dp"  />-->
 
-    <TextView
+
+
+            <RadioGroup
+                android:id="@+id/radioGenderGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <RadioButton
+                    android:id="@+id/radio_male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Male"
+                    android:checked="false"/>
+
+                <RadioButton
+                    android:id="@+id/radio_female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Female"
+                    android:layout_alignLeft="@+id/radio_male"
+                    android:checked="false"
+                    android:layout_alignTop="@+id/radioGenderGroup"/>
+
+            </RadioGroup>
+
+
+            <TextView
         android:id="@+id/textViewPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/spinnerGender"
-        android:layout_alignLeft="@+id/spinnerGender"
+        android:layout_below="@+id/radioGenderGroup"
+        android:layout_alignLeft="@+id/radioGenderGroup"
         android:layout_marginLeft="30dp"
         android:text="@string/phoneNumber"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
@@ -154,6 +188,9 @@
         android:layout_alignLeft="@+id/textViewCollegeName"
         android:layout_below="@+id/textViewCollegeName"
         android:layout_marginLeft="30dp"
+        android:textColor="#000"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"
         android:ems="10"
         android:inputType="phone" />
 
@@ -174,6 +211,9 @@
         android:layout_alignLeft="@+id/textViewEmail"
         android:layout_below="@+id/textViewEmail"
         android:layout_marginLeft="30dp"
+        android:textColor="#000"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"
         android:ems="10"
         android:inputType="textEmailAddress" />
 
@@ -195,6 +235,9 @@
         android:layout_below="@+id/textViewUserName"
         android:layout_marginLeft="30dp"
         android:ems="10"
+        android:textColor="#000"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"
         android:inputType="textPersonName"/>
 
     <TextView
@@ -215,6 +258,9 @@
         android:layout_below="@+id/textViewPassword"
         android:ems="10"
         android:layout_marginLeft="30dp"
+        android:textColor="#000"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@null"
         android:inputType="textPassword" />
 
             <TextView
@@ -234,6 +280,9 @@
                 android:layout_alignLeft="@+id/textViewCPassword"
                 android:layout_below="@+id/textViewCPassword"
                 android:ems="10"
+                android:textColor="#000"
+                android:cursorVisible="true"
+                android:textCursorDrawable="@null"
                 android:layout_marginLeft="30dp"
                 android:inputType="textPassword" />
 

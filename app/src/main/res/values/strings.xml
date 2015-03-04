@@ -33,7 +33,8 @@
     <string name="remember">Remember Me</string>
     <string name="submit">Submit</string>
     <string name="later">Not Now</string>
-/>        <string name="title_activity_sponsors_fragment">SponsorsFragment</string>
+/>            <string name="title_activity_sponsors_fragment">SponsorsFragment</string>
     <string name="title_activity_hospitality">Hospitality</string>
+    <string name="title_activity_dash_board_fragment">DashBoardFragment</string>
 
 </resources>

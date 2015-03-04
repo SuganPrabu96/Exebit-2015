@@ -45,7 +45,7 @@
                     android:layout_alignParentTop="true"
                     android:clickable="false"
                     android:layout_marginTop="20dp"
-                    android:src="@drawable/profilemale2"
+                    android:src="@drawable/profilegrey"
                     android:background="@color/myNavigationBarProPicBackgroundColor"
 
                     android:gravity="left" />
@@ -86,7 +86,8 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:choiceMode="singleChoice"
-            android:divider="#888888"
+            android:divider="#00123456"
+            android:paddingTop="14dp"
             android:layout_below="@+id/profilepic_name"
             android:dividerHeight="1dp"
             android:listSelector="#888888"

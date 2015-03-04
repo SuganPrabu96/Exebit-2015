@@ -52,9 +52,24 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 
 import util.ConnectionDetector;
 
@@ -83,15 +98,20 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
             Window window = Main_Activity.this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(Main_Activity.this.getResources().getColor(R.color.myStatusBarColor));
+
+            if(android.os.Build.VERSION.SDK_INT>= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(Main_Activity.this.getResources().getColor(R.color.myStatusBarColor));
+            }
+
             getSupportActionBar().setTitle("Exebit 2015");
 
         prefs=getSharedPreferences("Exebit",MODE_PRIVATE);
         gender="Male";
         userEmail="suganprabu1996@gmail.com";
         userProPic="";
-        /*userFullName="SuganPrabu";
-        userDateOfBirth="06th Nov 1996";
+        userFullName="SuganPrabu";
+        userCollege="IIT MADRAS";
+        /*userDateOfBirth="06th Nov 1996";
         userName="Sugan";
         userId="EE14B060";
         userPassword="SuganPrabu";
@@ -127,6 +147,8 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
            {
                Intent i = new Intent(Main_Activity.this,SecondActivity.class);
                i.putExtra("Login status",1);
+               prefs.edit().putString("userPassword", userPassword).apply();
+               prefs.edit().putString("userEmail", userEmail).apply();
                startActivity(i);
                finish();
            }
@@ -263,8 +285,8 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
 
                     if (!(strUserName.equals("") || strPassword.equals(""))) {
                         //TODO : make a database request and give a result
-                        boolean isValidated;
-                        if (strUserName.equals("sugan") && strPassword.equals("exebit")) {
+                        boolean isValidated  = true;
+                        /*if (strUserName.equals("sugan") && strPassword.equals("exebit")) {
                             isValidated = true;
                             prefs.edit().putString("userFullName",userFullName).apply();
                             prefs.edit().putString("userName", strUserName).apply();
@@ -279,13 +301,71 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
                         } else {
                             isValidated = false;
                             Toast.makeText(getApplicationContext(), "The username or password you entered is incorrect", Toast.LENGTH_SHORT).show();
-                        }
+                        }*/
 
                         if (isValidated) {
                             Intent intent = new Intent(Main_Activity.this, SecondActivity.class);
                             intent.putExtra("Login status", 1);
 
+                            prefs.edit().putString("userFullName",userFullName).apply();
+                            prefs.edit().putString("userName", strUserName).apply();
+                            prefs.edit().putString("userCollege", userCollege).apply();
+                            prefs.edit().putString("userId", userId).apply();
+                            prefs.edit().putString("gender",gender).apply();
+                            prefs.edit().putString("userPassword", strPassword).apply();
+                            prefs.edit().putString("userMobile", userMobile).apply();
+                            prefs.edit().putString("userEmail", userEmail).apply();
+                            prefs.edit().putString("userHostel", userHostel).apply();
+                            prefs.edit().putString("userHostelRoom", userHostelRoom).apply();
+
+                            /*Thread threadLogin = new Thread( new Runnable() {
+                                @Override
+                                public void run() {
+                                    String postReceiverUrl = "http://exebit.in/backend/_login.php";
+
+                                    HttpClient httpClient = new DefaultHttpClient();
+
+                                    HttpPost httpPost = new HttpPost(postReceiverUrl);
+
+                                    List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                                    nameValuePairs.add(new BasicNameValuePair("email", Main_Activity.userEmail));
+                                    nameValuePairs.add(new BasicNameValuePair("password", Main_Activity.userPassword));
+
+                                    try {
+                                        httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    HttpResponse response = null;
+                                    try {
+                                        response = httpClient.execute(httpPost);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                    HttpEntity resEntity = response.getEntity();
+
+                                    if (resEntity != null) {
+
+                                        try {
+                                            String responseStr = EntityUtils.toString(resEntity).trim();
+                                            Log.i("response", responseStr);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            });
+*/
+/*
                             //TODO : make a database request and populate my events with the user events
+                            threadLogin.start();*/
+/*
+                            HashMap<String, String> data = new HashMap<String, String>();
+                            data.put("name", Main_Activity.userName);
+                            data.put("password", Main_Activity.userPassword);
+                            AsyncHttpPost asyncHttpPost = new AsyncHttpPost(getApplicationContext(),data);
+                            asyncHttpPost.execute("http://exebit.in/_login.php");*/
 
                             startActivity(intent);
                             myDialog.dismiss();
@@ -340,7 +420,7 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
     @Override
     public void onConnected(Bundle bundle) {
         mSignInClicked = false;
-        Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
 
         // Get user's information
 
