@@ -2,6 +2,8 @@ package com.example.exebit.exebit2k15;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -61,19 +63,32 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import util.ConnectionDetector;
 
-public class Main_Activity extends ActionBarActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
+public class Main_Activity extends ActionBarActivity{
     Dialog myDialog;
     public GoogleApiClient mGoogleApiClient;
     public static SharedPreferences prefs = null;
@@ -83,7 +98,7 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
     private boolean mIntentInProgress;
     private static final int PROFILE_PIC_SIZE = 400;
     private boolean mSignInClicked;
-
+    public static boolean isValidated = true;
     public static ConnectionDetector internetConnection;
 
     private ConnectionResult mConnectionResult;
@@ -107,11 +122,12 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
 
         prefs=getSharedPreferences("Exebit",MODE_PRIVATE);
         gender="Male";
-        userEmail="suganprabu1996@gmail.com";
+
+        /*userEmail="suganprabu1996@gmail.com";
         userProPic="";
         userFullName="SuganPrabu";
         userCollege="IIT MADRAS";
-        /*userDateOfBirth="06th Nov 1996";
+        *//*userDateOfBirth="06th Nov 1996";
         userName="Sugan";
         userId="EE14B060";
         userPassword="SuganPrabu";
@@ -130,7 +146,10 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
         prefs.edit().putString("userHostel",userHostel).apply();
         prefs.edit().putString("userHostelRoom",userHostelRoom).apply();*/
 
-        if(userEmail.equals(""))
+        userEmail = prefs.getString("userEmail","");
+
+
+        /*if(userEmail.equals(""))
             {getProfileInformation();
             BitmapDrawable pro_pic = (BitmapDrawable) profilePic.getDrawable();
             profilePicture = pro_pic.getBitmap();
@@ -139,11 +158,11 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
         else {
            // profilePicture = decodeBase64(prefs.getString("userProPic", null));
             getProfileInformation();
-           /* BitmapDrawable pro_pic = (BitmapDrawable) profilePic.getDrawable();
+           *//* BitmapDrawable pro_pic = (BitmapDrawable) profilePic.getDrawable();
             profilePicture = pro_pic.getBitmap();
-            Log.d("t",encodeTobase64(profilePicture));*/
+            Log.d("t",encodeTobase64(profilePicture));*//*
         }
-        if(!prefs.getString("userFullName","").equals(""))
+        */if(!prefs.getString("userFullName","").equals(""))
            {
                Intent i = new Intent(Main_Activity.this,SecondActivity.class);
                i.putExtra("Login status",1);
@@ -285,7 +304,7 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
 
                     if (!(strUserName.equals("") || strPassword.equals(""))) {
                         //TODO : make a database request and give a result
-                        boolean isValidated  = true;
+
                         /*if (strUserName.equals("sugan") && strPassword.equals("exebit")) {
                             isValidated = true;
                             prefs.edit().putString("userFullName",userFullName).apply();
@@ -366,11 +385,8 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
                             data.put("password", Main_Activity.userPassword);
                             AsyncHttpPost asyncHttpPost = new AsyncHttpPost(getApplicationContext(),data);
                             asyncHttpPost.execute("http://exebit.in/_login.php");*/
+                            new FetchTask().execute(strUserName,strPassword, getApplicationContext());
 
-                            startActivity(intent);
-                            myDialog.dismiss();
-                            myDialog.cancel();
-                            finish();
                         }
                     } else if(strUserName.equals(""))
                         Toast.makeText(getApplicationContext(), "Enter your username", Toast.LENGTH_SHORT).show();
@@ -379,7 +395,7 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
         });
     }
 
-    protected void onStart() {
+   /* protected void onStart() {
         super.onStart();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -389,17 +405,17 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
             mGoogleApiClient.connect();
         Log.d("t1","Inside onStart");
     }
-
-    protected void onStop() {
+*/
+   /* protected void onStop() {
         super.onStop();
         if (mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
     }
 
-    /**
+    *//**
      * Method to resolve any signin errors
-     * */
+     * *//*
     private void resolveSignInError() {
         if (mConnectionResult.hasResolution()) {
             try {
@@ -411,13 +427,13 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
             }
         }
     }
-
+*/
     @Override
     public void onBackPressed() {
         finish();
     }
 
-    @Override
+  /*  @Override
     public void onConnected(Bundle bundle) {
         mSignInClicked = false;
         //Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
@@ -426,8 +442,8 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
 
 
     }
-
-    private void getProfileInformation() {
+*/
+   /* private void getProfileInformation() {
         try {
             if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
                 Person currentPerson = Plus.PeopleApi
@@ -483,7 +499,8 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
         }
     }
 
-
+*/
+/*
     @Override
     public void onConnectionSuspended(int i) {
         mGoogleApiClient.connect();
@@ -526,6 +543,7 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
             }
         }
     }
+*/
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -566,8 +584,185 @@ public class Main_Activity extends ActionBarActivity implements GoogleApiClient.
         return super.onOptionsItemSelected(item);
     }
 */
+    class FetchTask extends AsyncTask<Void, String, String> {
+        String user,pass;
+        ProgressDialog p1;
+                String resStr;
+        public void execute(String username, String password, Context context) {
+            user=username;
+            pass=password;
+            p1 = new ProgressDialog(Main_Activity.this);
+            /*p1.setCancelable(false);
+            p1.setTitle("Loading");
+            p1.show();*/
+            Log.i("fetch","execute");
+            Toast.makeText(Main_Activity.this, "Verifying . . .", Toast.LENGTH_SHORT).show();
+            onPreExecute();
+            //doInBackground();
+            //onPostExecute(resStr);
+        }
+        @Override
 
-}
+        protected String doInBackground(Void ... params) {
+            try {/*
+                p1.setCancelable(false);
+                p1.setTitle("Loading");
+                p1.show();*/
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new HttpPost("http://www.exebit.in/backend/_login.php");
+
+                Log.i("fetch","do in background");
+
+                // Add your data
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                nameValuePairs.add(new BasicNameValuePair("email", user));
+                nameValuePairs.add(new BasicNameValuePair("password", pass));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+
+                // parsing data
+                resStr = EntityUtils.toString(response.getEntity()).trim();
+                Log.i("fetch response",resStr );
+                //return resStr;
+
+                /*Log.i("fetch","post execute");
+                if(resStr.contains("Seems like you've screwed up somewhere. Try logging in again")) {
+                    Toast.makeText(getApplicationContext(), "The email or password you entered is incorrect", Toast.LENGTH_SHORT).show();
+                    //p1.hide();
+                }
+                else {
+
+                    Main_Activity.userName = user;
+                    Main_Activity.userPassword = pass;
+                    Main_Activity.isValidated = true;
+                    Intent intent = new Intent(Main_Activity.this, SecondActivity.class);
+                    Main_Activity.userName = this.user;
+                    Main_Activity.userPassword = this.pass;
+                    intent.putExtra("Login status", 1);
+                    startActivity(intent);
+                    p1.hide();
+                    myDialog.dismiss();
+                    myDialog.cancel();
+
+                    finish();
+                }*/
+
+                //return  result11;
+            } catch (Exception e) {
+                e.printStackTrace();
+                //return null;
+            }
+
+            onPostExecute(resStr);
+
+            return  null;
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            Log.i("fetch","pre execute");
+
+            /*p1.setCancelable(false);
+            p1.setTitle("Loading");
+            p1.show();*/
+
+            doInBackground(null);
+        }
+
+        @Override
+        protected void onPostExecute(String resStr) {
+
+            Log.i("fetch","post execute");
+            if(resStr==null) {
+                execute(user,pass,Main_Activity.this);
+            }
+            else if(resStr.contains("Try logging in again")) {
+                Toast.makeText(getApplicationContext(), "The email or password you entered is incorrect", Toast.LENGTH_SHORT).show();
+               // p1.hide();
+            }
+            else {
+
+                Main_Activity.userName = user;
+                Main_Activity.userPassword = pass;
+                Main_Activity.isValidated = true;
+                prefs.edit().putString("userEmail",userName).apply();
+                prefs.edit().putString("userName",userName).apply();
+                prefs.edit().putString("userPassword",userPassword).apply();
+                prefs.edit().putString("userEmail",userName).commit();
+                prefs.edit().putString("userName",userName).commit();
+                prefs.edit().putString("userPassword",userPassword).commit();
+                Intent intent = new Intent(Main_Activity.this, SecondActivity.class);
+                Main_Activity.userName = this.user;
+                Main_Activity.userPassword = this.pass;
+                intent.putExtra("Login status", 1);
+                startActivity(intent);
+                //p1.dismiss();
+                myDialog.dismiss();
+                myDialog.cancel();
+
+                finish();
+            }
+
+           /*Log.i("fetch","post execute");
+           // p1.dismiss();
+            if(result.contains("Try logging in again")) {
+                Toast.makeText(getApplicationContext(), "Incorrect password", Toast.LENGTH_SHORT).show();
+            }
+            else {
+
+                Intent intent = new Intent(Main_Activity.this, SecondActivity.class);
+                Main_Activity.userName = this.user;
+                Main_Activity.userPassword = this.pass;
+                intent.putExtra("Login status", 1);
+                startActivity(intent);
+                myDialog.dismiss();
+                myDialog.cancel();
+                finish();
+            }*/
+           /* if (result != null) {
+                DocumentBuilderFactory dbf =
+                        DocumentBuilderFactory.newInstance();
+                DocumentBuilder db = null;
+                try {
+                    db = dbf.newDocumentBuilder();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                }
+                InputSource is = new InputSource();
+                is.setCharacterStream(new StringReader(result));
+                Document doc;
+                try {
+                    doc = db.parse(is);
+                    //NodeList name=doc.getElementsByTagName("div id=\"secondary-header-content\"");
+
+                    //System.out.print(doc);
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                String check="<div id=\"secondary-header-content\"><div id=\"member-name\"><span>";
+                for (String retval: result.split("\n")){
+                    if(retval.contains(check)){
+                        System.out.println(retval);
+                        String[] res=retval.split("<span>");
+                        System.out.println(res[1]);
+                        String[] res1=res[1].split("</span>");
+                        System.out.println(res1[0]);
+                    }
+                }
+                //System.out.print(result);
+
+            } else {
+                // error occured
+            }*/
+        }
 
 
-	
+    }
+
+
+}	

@@ -23,6 +23,9 @@ public class Profile_Page_ChangePassword extends Fragment {
 
     public EditText old_password;
     public EditText new_password;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout resource that'll be returned

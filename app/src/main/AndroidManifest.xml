@@ -24,6 +24,8 @@
             android:name=".profile_page_main_page"
             android:label="@string/title_activity_profile_page_main_page" >
         </activity>
+        <activity android:name=".StickyHeaderScrollViewActivity"
+            android:label="sticky_header_scroll_view_activity"></activity>
         <activity
             android:name=".Main_Activity"
             android:label="Exebit 2015" >

@@ -1,4 +1,4 @@
-package Schedule_recyclerView;
+package com.example.exebit.exebit2k15;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

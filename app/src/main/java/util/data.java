@@ -11,8 +11,8 @@ import java.util.List;
 public class data {
     public static NavDrawerItem[] navtitles={
             new NavDrawerItem("Schedule", R.drawable.schedule),
-            new NavDrawerItem("My Profile",R.drawable.profilemale2),
-            new NavDrawerItem("My events",R.drawable.registered),
+            new NavDrawerItem("Dashboard",R.drawable.profilemale2),
+            //new NavDrawerItem("My events",R.drawable.registered),
             new NavDrawerItem("Hospitality",R.drawable.hospitality),
             new NavDrawerItem("FAQ",R.drawable.faq),
             new NavDrawerItem("Sponsors",R.drawable.sponsor),

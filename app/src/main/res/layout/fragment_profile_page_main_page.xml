@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:background="@color/myBackgroundColor">
 
-        <TextView
+        <!--<TextView
         android:id="@+id/textViewsample"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
         android:textStyle="bold"
         android:textSize="30sp">
         </TextView>
-
+-->
     <it.neokree.materialtabs.MaterialTabHost
             android:id="@+id/materialTabHostText"
             android:layout_width="match_parent"

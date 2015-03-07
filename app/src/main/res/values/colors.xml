@@ -21,6 +21,7 @@
     <color name="myNavigationBarProPicBackgroundColor">#9FA8DA</color>
     <color name="NavigationBarSelectedItem">#E0E0E0</color>
     <color name="NavigationBarUnselectedItem">#ffffff</color>
+    <color name="primary">#009688</color>
 
     <color name="myDrawerItemSelectedColor">#ff47d8db</color>
 </resources>
