@@ -628,7 +628,7 @@ public class Main_Activity extends ActionBarActivity{
                 //return resStr;
 
                 //Log.i("fetch","post execute");
-                if(resStr.contains("Seems like you've screwed up somewhere. Try logging in again")) {
+                if(resStr.contains("Try logging in again")) {
                     Toast.makeText(getApplicationContext(), "The email or password you entered is incorrect", Toast.LENGTH_SHORT).show();
                     //p1.hide();
                 }
@@ -642,7 +642,7 @@ public class Main_Activity extends ActionBarActivity{
                     Main_Activity.userPassword = this.pass;
                     intent.putExtra("Login status", 1);
                     startActivity(intent);
-                    p1.hide();
+                    //p1.hide();
                     myDialog.dismiss();
                     myDialog.cancel();
 
