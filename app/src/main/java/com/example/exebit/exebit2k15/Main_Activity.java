@@ -591,14 +591,14 @@ public class Main_Activity extends ActionBarActivity{
         public void execute(String username, String password, Context context) {
             user=username;
             pass=password;
-            p1 = new ProgressDialog(Main_Activity.this);
+            //p1 = new ProgressDialog(Main_Activity.this);
             /*p1.setCancelable(false);
             p1.setTitle("Loading");
             p1.show();*/
             Log.i("fetch","execute");
             Toast.makeText(Main_Activity.this, "Verifying . . .", Toast.LENGTH_SHORT).show();
-            onPreExecute();
-            //doInBackground();
+            //onPreExecute();
+            doInBackground();
             //onPostExecute(resStr);
         }
         @Override
@@ -627,7 +627,7 @@ public class Main_Activity extends ActionBarActivity{
                 Log.i("fetch response",resStr );
                 //return resStr;
 
-                /*Log.i("fetch","post execute");
+                //Log.i("fetch","post execute");
                 if(resStr.contains("Seems like you've screwed up somewhere. Try logging in again")) {
                     Toast.makeText(getApplicationContext(), "The email or password you entered is incorrect", Toast.LENGTH_SHORT).show();
                     //p1.hide();
@@ -647,15 +647,13 @@ public class Main_Activity extends ActionBarActivity{
                     myDialog.cancel();
 
                     finish();
-                }*/
+                }
 
                 //return  result11;
             } catch (Exception e) {
                 e.printStackTrace();
                 //return null;
             }
-
-            onPostExecute(resStr);
 
             return  null;
 
@@ -669,13 +667,13 @@ public class Main_Activity extends ActionBarActivity{
             p1.setTitle("Loading");
             p1.show();*/
 
-            doInBackground(null);
+            //doInBackground(null);
         }
 
         @Override
         protected void onPostExecute(String resStr) {
 
-            Log.i("fetch","post execute");
+           /* Log.i("fetch","post execute");
             if(resStr==null) {
                 execute(user,pass,Main_Activity.this);
             }
